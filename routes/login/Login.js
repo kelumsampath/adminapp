@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput, StyleSheet , AsyncStorage } from 'react-native';
 
 class Login extends Component{
 
@@ -7,30 +7,57 @@ class Login extends Component{
     super(props);
   }
   state={
-    email:'',
+    username:'',
     password:''
   };
-  handleEmail=(text)=>{
-    this.setState({email:text})
+  handleUsername=(text)=>{
+    this.setState({username:text})
   }
   handlePassword =(text)=>{
     this.setState({password:text})
   }
-  login(email,password){
-    alert('email: '+email+' password: '+password);
-    this.props.navigation.navigate('Register');
+  login(username,password){
+    fetch('http://192.168.137.1:3000/user/login', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: username,
+        password: password,
+      }),
+  })
+
+      .then((response) => response.json())
+      .then((res) => {
+
+          if (res.state === true) {
+            if(res.user.role=='admin'){
+              AsyncStorage.setItem('token', res.token);
+              alert(res.user.role+'connected from backend');
+              this.props.navigation.navigate('Register');
+            }else{
+              alert(res.user.role+' NOT A ADMIN USER');
+            }
+              
+          } else {
+              alert(res.msg)
+          }
+      })
+      .done();
   }
 
   render(){
     return(
       <View style = {styles.container}>
-            <Text>Email:</Text>
+            <Text>Username:</Text>
             <TextInput style = {styles.input}
                underlineColorAndroid = "transparent"
-               placeholder = "Email"
+               placeholder = "Username"
                placeholderTextColor = "#9a73ef"
                autoCapitalize = "none"
-               onChangeText = {this.handleEmail}/>
+               onChangeText = {this.handleUsername}/>
             
             <Text>Password:</Text>
             <TextInput style = {styles.input}
@@ -43,7 +70,7 @@ class Login extends Component{
             <TouchableOpacity
                style = {styles.submitButton}
                onPress = {
-                  () => this.login(this.state.email, this.state.password)
+                  () => this.login(this.state.username, this.state.password)
                }>
                <Text style = {styles.submitButtonText}> Submit </Text>
             </TouchableOpacity>
