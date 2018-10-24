@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 
-class Login extends Component{
+class Register extends Component{
   render(){
     return(
       <View>
-        <Text style={{color:"red"}}>kelum sampath</Text>
+        <Text style={{color:"red"}}>Register</Text>
       </View>
     );
   }
 }
 
-export default Login;
+export default Register;
