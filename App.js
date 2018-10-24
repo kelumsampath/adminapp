@@ -8,7 +8,7 @@ import  Home from './routes/app/HomeScreen/index';
 const Navigation = StackNavigator({
   Home: { screen : myScreen},
   Register: { screen : RegisterScreen },
-  myhome: { screen : Home },
+  Myhome: { screen : Home },
 })
 
 class App extends Component{

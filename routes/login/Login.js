@@ -36,7 +36,7 @@ class Login extends Component{
             if(res.user.role=='admin'){
               AsyncStorage.setItem('token', res.token);
               alert(res.user.role+'connected from backend');
-              this.props.navigation.navigate('Register');
+              this.props.navigation.navigate('Myhome');
             }else{
               alert(res.user.role+' NOT A ADMIN USER');
             }
@@ -78,7 +78,7 @@ class Login extends Component{
             <TouchableOpacity
                style = {styles.submitButton}
                onPress = {
-                  () => this.props.navigation.navigate('myhome')
+                  () => this.props.navigation.navigate('Myhome')
                }>
                <Text style = {styles.submitButtonText}> Submit </Text>
             </TouchableOpacity>
