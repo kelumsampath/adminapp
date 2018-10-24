@@ -74,6 +74,14 @@ class Login extends Component{
                }>
                <Text style = {styles.submitButtonText}> Submit </Text>
             </TouchableOpacity>
+
+            <TouchableOpacity
+               style = {styles.submitButton}
+               onPress = {
+                  () => this.props.navigation.navigate('myhome')
+               }>
+               <Text style = {styles.submitButtonText}> Submit </Text>
+            </TouchableOpacity>
          </View>
     );
   }

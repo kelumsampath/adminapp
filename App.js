@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { Text, View  } from 'react-native';
 import { StackNavigator } from 'react-navigation';
-import HomeScreen from './routes/login/Login';
+import myScreen from './routes/login/Login';
 import RegisterScreen from './routes/register';
+import  Home from './routes/app/HomeScreen/index';
 
 const Navigation = StackNavigator({
-  Home: { screen : HomeScreen},
-  Register: { screen : RegisterScreen }
+  Home: { screen : myScreen},
+  Register: { screen : RegisterScreen },
+  myhome: { screen : Home },
 })
 
 class App extends Component{
