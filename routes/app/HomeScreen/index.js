@@ -5,6 +5,7 @@ import { DrawerNavigator } from "react-navigation";
 import SecondPage from './../SecondPage/index';
 import ThirdPage from './../ThirdPage/index';
 import FourthPage from './../FourthPage/index';
+import Logout from './../Logout/index';
 
 const HomeScreenRouter = DrawerNavigator(
   {
@@ -12,6 +13,7 @@ const HomeScreenRouter = DrawerNavigator(
     second: { screen: SecondPage },
     third: { screen: ThirdPage },
     fourth: { screen: FourthPage },
+    logout: { screen: Logout},
   },
   {
     contentComponent: props => <SideBar {...props} />
