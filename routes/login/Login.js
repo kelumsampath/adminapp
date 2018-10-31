@@ -5,6 +5,7 @@ class Login extends Component{
 
   constructor(props){
     super(props);
+    this.getToken();
   }
   state={
     username:'',
@@ -19,7 +20,7 @@ class Login extends Component{
   async setToken(mytoken){
     try{
       await AsyncStorage.setItem("token",mytoken);
-      this.getToken();
+      //this.getToken();
     }catch(error){
       alert("token store error");
     }
@@ -27,8 +28,11 @@ class Login extends Component{
   async getToken(){
     try{
       let thistoken=await AsyncStorage.getItem("token");
-      let a=JSON.stringify(thistoken)
-      alert(a)
+      //let a=JSON.stringify(thistoken)
+      //alert(a)
+      if(thistoken!=null){
+        this.props.navigation.navigate('Myhome');
+      }
     }catch(error){
       alert("token get error");
     }
