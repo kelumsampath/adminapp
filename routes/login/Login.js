@@ -16,6 +16,24 @@ class Login extends Component{
   handlePassword =(text)=>{
     this.setState({password:text})
   }
+  async setToken(mytoken){
+    try{
+      await AsyncStorage.setItem("token",mytoken);
+      this.getToken();
+    }catch(error){
+      alert("token store error");
+    }
+  }
+  async getToken(){
+    try{
+      let thistoken=await AsyncStorage.getItem("token");
+      let a=JSON.stringify(thistoken)
+      alert(a)
+    }catch(error){
+      alert("token get error");
+    }
+  }
+
   login(username,password){
     fetch('http://192.168.137.1:3000/user/login', {
       method: 'POST',
@@ -34,8 +52,7 @@ class Login extends Component{
 
           if (res.state === true) {
             if(res.user.role=='admin'){
-              AsyncStorage.setItem('token', res.token);
-              alert(res.user.role+'connected from backend');
+              this.setToken(res.token);
               this.props.navigation.navigate('Myhome');
             }else{
               alert(res.user.role+' NOT A ADMIN USER');
